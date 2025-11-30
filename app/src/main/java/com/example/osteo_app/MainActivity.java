@@ -1,4 +1,4 @@
-package com.example.osteaoapp;
+package com.example.trabalho;
 
 import static android.content.ContentValues.TAG;
 
@@ -57,8 +57,7 @@ public class MainActivity extends AppCompatActivity {
                 (CheckBox) findViewById(R.id.cb_hipertensao)
         );
     }
-
-    private void SalvarCadastro (View view){
+    public void SalvarCadastro(View view) {
         String nome = nomeEditText.getText().toString().trim();
         String idadeStr = idadeEditText.getText().toString().trim();
         String anoDiagnosticoStr = anoDiagnosticoEditText.getText().toString().trim();
@@ -108,5 +107,24 @@ public class MainActivity extends AppCompatActivity {
         Log.d(TAG, "-----------------------------------");
 
         Toast.makeText(this, "Perfil de " + nome + " cadastrado com sucesso! (Verifique o Logcat)", Toast.LENGTH_LONG).show();
+
+        UsuarioDAO usuarioDAO = new UsuarioDAO(this);
+
+        long id = usuarioDAO.inserirUsuario(
+                nome,
+                idade,
+                anoDiagnostico,
+                celular,
+                genero,
+                comorbidadesSelecionadas
+        );
+
+        if (id > 0) {
+            Toast.makeText(this, "Usuário salvo com ID: " + id, Toast.LENGTH_LONG).show();
+        } else {
+            Toast.makeText(this, "Erro ao salvar no banco!", Toast.LENGTH_LONG).show();
+        }
+
+
     }
 }
