@@ -72,12 +72,13 @@
                         android:textStyle="bold"
                         android:layout_marginBottom="16dp"/>
 
-                    <EditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="Nome Completo"
-                        android:inputType="textPersonName"
-                        android:padding="12dp"/>
+                        <EditText
+                            android:id="@+id/edit_text_nome"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Nome Completo"
+                            android:inputType="textPersonName"
+                            android:padding="12dp"/>
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -87,6 +88,7 @@
                         android:layout_marginBottom="16dp">
 
                         <EditText
+                            android:id="@+id/edit_text_idade"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:hint="Idade"
@@ -95,6 +97,7 @@
                             android:layout_marginLeft="20dp"/>
 
                         <EditText
+                            android:id="@+id/edit_text_ano_diagnostico"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:hint="Ano de Diagnóstico"
@@ -112,6 +115,7 @@
                         android:layout_marginBottom="8dp"/>
 
                     <RadioGroup
+                        android:id="@+id/radio_group_genero"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
@@ -142,6 +146,7 @@
                         android:layout_marginBottom="8dp"/>
 
                     <EditText
+                        android:id="@+id/edit_text_celular"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Telefone"
@@ -178,22 +183,25 @@
                         android:text="Selecione outras condições de saúde que você possui:"
                         android:layout_marginBottom="12dp"/>
 
-                    <CheckBox android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Artrite Reumatoide"/>
-                    <CheckBox android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Espondilite Anquilosante"/>
-                    <CheckBox android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Lúpus Eritematoso Sistêmico"/>
-                    <CheckBox android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Gota"/>
-                    <CheckBox android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Fibromialgia"/>
-                    <CheckBox android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Diabetes"/>
-                    <CheckBox android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Hipertensão"/>
+                    <CheckBox android:id="@+id/cb_artrite_reumatoide" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Artrite Reumatoide"/>
+                    <CheckBox android:id="@+id/cb_espondilite" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Espondilite Anquilosante"/>
+                    <CheckBox android:id="@+id/cb_lupus" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Lúpus Eritematoso Sistêmico"/>
+                    <CheckBox android:id="@+id/cb_gota" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Gota"/>
+                    <CheckBox android:id="@+id/cb_fibromialgia" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Fibromialgia"/>
+                    <CheckBox android:id="@+id/cb_diabetes" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Diabetes"/>
+                    <CheckBox android:id="@+id/cb_hipertensao" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Hipertensão"/>
 
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
             <Button
+                android:id="@+id/botao_cadastrar"
+                android:onClick="SalvaCadastro"
                 android:layout_marginTop="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Cadastrar"/>
+                android:text="Cadastrar"
+                tools:ignore="OnClick" />
 
         </LinearLayout>
     </ScrollView>
