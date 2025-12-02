@@ -1,10 +1,8 @@
-package com.example.trabalho;
+package com.example.osteo_app;
 
-import static android.content.ContentValues.TAG;
-
-import android.annotation.SuppressLint;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -12,12 +10,8 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
-
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -31,14 +25,21 @@ public class MainActivity extends AppCompatActivity {
     private EditText celularEditText;
     private RadioGroup generoRadioGroup;
     private Button cadastrarButton;
-
     private List<CheckBox> comorbidadeCheckboxes;
 
-    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
+
+        SharedPreferences prefs = getSharedPreferences("prefs", MODE_PRIVATE);
+        boolean isProfileCreated = prefs.getBoolean("isProfileCreated", false);
+
+        if (isProfileCreated) {
+            startActivity(new Intent(this, PerfilActivity.class));
+            finish();
+            return;
+        }
+
         setContentView(R.layout.activity_main);
 
         nomeEditText = findViewById(R.id.edit_text_nome);
@@ -56,7 +57,24 @@ public class MainActivity extends AppCompatActivity {
                 (CheckBox) findViewById(R.id.cb_diabetes),
                 (CheckBox) findViewById(R.id.cb_hipertensao)
         );
+
+        BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation_bar);
+        bottomNav.setSelectedItemId(R.id.nav_profile);
+        bottomNav.setOnItemSelectedListener(item -> {
+            int itemId = item.getItemId();
+            if (itemId == R.id.nav_relief) {
+                startActivity(new Intent(this, HomeActivity.class));
+                return true;
+            } else if (itemId == R.id.nav_pain) {
+                startActivity(new Intent(this, PainAssessmentActivity.class));
+                return true;
+            } else if (itemId == R.id.nav_profile) {
+                return true; // Already on this screen
+            }
+            return false;
+        });
     }
+
     public void SalvarCadastro(View view) {
         String nome = nomeEditText.getText().toString().trim();
         String idadeStr = idadeEditText.getText().toString().trim();
@@ -97,17 +115,6 @@ public class MainActivity extends AppCompatActivity {
         }
         String comorbidadesSelecionadas = String.join(", ", comorbidadesList);
 
-        Log.d(TAG, "--- DADOS DO PERFIL COLETADOS ---");
-        Log.d(TAG, "Nome: " + nome);
-        Log.d(TAG, "Idade: " + idade);
-        Log.d(TAG, "Ano de Diagnóstico: " + (anoDiagnostico != null ? anoDiagnostico : "Não informado"));
-        Log.d(TAG, "Celular: " + celular);
-        Log.d(TAG, "Gênero: " + genero);
-        Log.d(TAG, "Comorbidades: " + comorbidadesSelecionadas);
-        Log.d(TAG, "-----------------------------------");
-
-        Toast.makeText(this, "Perfil de " + nome + " cadastrado com sucesso! (Verifique o Logcat)", Toast.LENGTH_LONG).show();
-
         UsuarioDAO usuarioDAO = new UsuarioDAO(this);
 
         long id = usuarioDAO.inserirUsuario(
@@ -120,11 +127,16 @@ public class MainActivity extends AppCompatActivity {
         );
 
         if (id > 0) {
+            SharedPreferences prefs = getSharedPreferences("prefs", MODE_PRIVATE);
+            SharedPreferences.Editor editor = prefs.edit();
+            editor.putBoolean("isProfileCreated", true);
+            editor.apply();
+
             Toast.makeText(this, "Usuário salvo com ID: " + id, Toast.LENGTH_LONG).show();
+            startActivity(new Intent(this, PerfilActivity.class));
+            finish();
         } else {
             Toast.makeText(this, "Erro ao salvar no banco!", Toast.LENGTH_LONG).show();
         }
-
-
     }
 }

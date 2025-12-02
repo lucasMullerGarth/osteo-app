@@ -13,14 +13,42 @@
         android:theme="@style/Theme.Osteoapp"
         tools:targetApi="31">
         <activity
-            android:name=".MainActivity"
-            android:exported="true">
+            android:name=".PerfilActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Osteoapp" />
+        <activity
+            android:name=".ReliefTechniquesActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Osteoapp" />
+        <activity
+            android:name=".EducationActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Osteoapp" />
+        <activity
+            android:name=".HistoryActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Osteoapp" />
+        <activity
+            android:name=".PainAssessmentActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Osteoapp" />
+        <activity
+            android:name=".BodyMapActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Osteoapp" />
+        <activity
+            android:name=".HomeActivity"
+            android:exported="true"
+            android:theme="@style/Theme.Osteoapp">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".MainActivity"
+            android:exported="false"></activity>
     </application>
 
 </manifest>

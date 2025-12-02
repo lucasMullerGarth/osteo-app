@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/nav_relief"
+        android:title="Alívio"
+        android:icon="@android:drawable/ic_menu_compass" />
+
+    <item
+        android:id="@+id/nav_pain"
+        android:title="Dor"
+        android:icon="@android:drawable/ic_menu_info_details" />
+
+    <item
+        android:id="@+id/nav_profile"
+        android:title="Perfil"
+        android:icon="@android:drawable/ic_menu_myplaces" />
+
+</menu>

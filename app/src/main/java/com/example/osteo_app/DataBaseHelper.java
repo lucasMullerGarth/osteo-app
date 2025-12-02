@@ -1,17 +1,17 @@
-package com.example.trabalho;
+package com.example.osteo_app;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-public class DatabaseHelper extends SQLiteOpenHelper {
+public class DataBaseHelper extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "usuarios.db";
     private static final int DATABASE_VERSION = 1;
 
     public static final String TABLE_USUARIO = "usuario";
 
-    public DatabaseHelper(Context context) {
+    public DataBaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
