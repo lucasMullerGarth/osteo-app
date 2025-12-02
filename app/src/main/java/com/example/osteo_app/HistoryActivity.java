@@ -1,45 +1,101 @@
 package com.example.osteo_app;
 
-import android.content.Intent;
 import android.os.Bundle;
-
-import com.google.android.material.snackbar.Snackbar;
-
+import android.util.Pair;
+import android.widget.Button;
+import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.view.View;
-import android.widget.Button;
+import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.components.XAxis;
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.data.LineData;
+import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
-
-import com.example.osteo_app.databinding.ActivityHistoryBinding;
+import java.util.ArrayList;
+import java.util.List;
 
 public class HistoryActivity extends AppCompatActivity {
 
-    private AppBarConfiguration appBarConfiguration;
-    private ActivityHistoryBinding binding;
-
-    private Button voltarButton;
-
+    private PainAssessmentDAO painAssessmentDAO;
+    private UsuarioDAO usuarioDAO;
+    private TextView txtMediaDor, txtTendencia;
+    private LineChart lineChart;
+    private TextView txtRegistrosRecentes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_history);
-        voltarButton = findViewById(R.id.btnVoltarHistory);
 
-        voltarButton.setOnClickListener(view -> voltar());
+        painAssessmentDAO = new PainAssessmentDAO(this);
+        usuarioDAO = new UsuarioDAO(this);
+
+        txtMediaDor = findViewById(R.id.txtMediaDor);
+        txtTendencia = findViewById(R.id.txtTendencia);
+        lineChart = findViewById(R.id.lineChart);
+        txtRegistrosRecentes = findViewById(R.id.txtRegistrosRecentes);
+        Button btnVoltar = findViewById(R.id.btnVoltarHistory);
+
+        btnVoltar.setOnClickListener(v -> finish());
+
+        loadHistoryData();
     }
 
-    public void voltar(){
+    private void loadHistoryData() {
+        Usuario usuario = usuarioDAO.getUsuario();
+        if (usuario == null) {
+            // Tratar caso não haja usuário
+            return;
+        }
 
-        Intent intent = new Intent(this, HomeActivity.class);
-        startActivity(intent);
+        List<Pair<String, Integer>> assessments = painAssessmentDAO.getAllPainAssessments(usuario.getId());
 
+        if (assessments.isEmpty()) {
+            // Tratar caso não haja avaliações
+            return;
+        }
+
+        // Calcular Média
+        float media = 0;
+        for (Pair<String, Integer> assessment : assessments) {
+            media += assessment.second;
+        }
+        media /= assessments.size();
+        txtMediaDor.setText(String.format("%.1f/10", media));
+
+        // Calcular Tendência
+        if (assessments.size() > 1) {
+            float tendencia = (float) (assessments.get(assessments.size() - 1).second - assessments.get(0).second) / assessments.size();
+            txtTendencia.setText(String.format("%+.1f", tendencia));
+        }
+
+        // Popular Gráfico
+        ArrayList<Entry> entries = new ArrayList<>();
+        final ArrayList<String> labels = new ArrayList<>();
+        for (int i = 0; i < assessments.size(); i++) {
+            entries.add(new Entry(i, assessments.get(i).second));
+            labels.add(assessments.get(i).first);
+        }
+
+        LineDataSet dataSet = new LineDataSet(entries, "Nível de Dor");
+        LineData lineData = new LineData(dataSet);
+        lineChart.setData(lineData);
+
+        XAxis xAxis = lineChart.getXAxis();
+        xAxis.setValueFormatter(new IndexAxisValueFormatter(labels));
+        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+        xAxis.setGranularity(1f);
+        xAxis.setLabelRotationAngle(-45);
+
+        lineChart.invalidate(); // refresh
+
+        // Popular Registros Recentes
+        StringBuilder registros = new StringBuilder();
+        for (int i = assessments.size() - 1; i >= 0 && i >= assessments.size() - 5; i--) {
+            registros.append(assessments.get(i).first).append(" - Nível: ").append(assessments.get(i).second).append("\n");
+        }
+        txtRegistrosRecentes.setText(registros.toString());
     }
-
-
 }
