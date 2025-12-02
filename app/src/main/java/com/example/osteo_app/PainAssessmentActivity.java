@@ -61,6 +61,7 @@ public class PainAssessmentActivity extends AppCompatActivity {
             public void onStopTrackingTouch(SeekBar seekBar) {}
 
         });
+
         /*Barra de navegação inferior*/
         BottomNavigationView bottomNav = findViewById(R.id.bottomNav);
 
@@ -84,6 +85,4 @@ public class PainAssessmentActivity extends AppCompatActivity {
             return false;
         });
     }
-
-    
 }
