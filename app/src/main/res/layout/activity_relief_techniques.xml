@@ -1,114 +1,539 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp">
+    android:background="#F0F4F8"
+    android:paddingTop="8dp"
+    android:paddingBottom="8dp"
+    android:clipToPadding="false">
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <TextView
-            android:text="💆‍♂️ Técnicas de Alívio"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            android:layout_marginBottom="12dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <TextView
-            android:text="🖐️ Alongamento de Mãos (5 min)"
-            android:textStyle="bold"
-            android:textSize="18sp"
-            android:layout_marginTop="10dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-
-        <TextView
-            android:text="Bom para: Rigidez matinal 🌅\n\nComo fazer:\n1. Sente-se confortavelmente\n2. Abra as mãos devagar\n3. Feche formando punho suave\n4. Repita 10 vezes\n5. Descanse\n\n⚠️ ATENÇÃO: Pare se sentir dor forte."
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-
-        <TextView
-            android:text="🌬️ Respiração Profunda (5 min)"
-            android:textStyle="bold"
-            android:textSize="18sp"
-            android:layout_marginTop="20dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-
-        <TextView
-            android:text="Reduz tensão e ansiedade 😌\n\nComo fazer:\n1. Sente-se ou deite\n2. Coloque uma mão na barriga\n3. Inspire pelo nariz (conte até 4)\n4. Sinta a barriga subir\n5. Expire pela boca (conte até 6)\n6. Repita 10 vezes\n\n💡 Dica: Faça antes de dormir."
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-
-        <TextView
-            android:text="Respiração 4-7-8 (3–5 min)"
-            android:textStyle="bold"
-            android:textSize="18sp"
-            android:layout_marginTop="20dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-
-        <TextView
-            android:text="Acalma e melhora o sono 😴\n\nComo fazer:\n1. Inspire pelo nariz contando até 4\n2. Segure o ar contando até 7\n3. Expire pela boca contando até 8\n4. Faça 4 ciclos\n\n⚠️ Atenção: Pode causar leve tontura no início."
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-
-        <TextView
-            android:text="😮‍💨 Suspiro de Alívio (2 min)"
-            android:textStyle="bold"
-            android:textSize="18sp"
-            android:layout_marginTop="20dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-
-        <TextView
-            android:text="Como fazer:\n1. Inspire profundamente pelo nariz\n2. Solte o ar com um suspiro sonoro 😮‍💨\n3. Deixe os ombros relaxarem\n4. Repita 5 vezes dizendo \"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-
-        <TextView
-            android:text="💤 Relaxamento Muscular (10–15 min)"
-            android:textStyle="bold"
-            android:textSize="18sp"
-            android:layout_marginTop="20dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-
-        <TextView
-            android:text="Como fazer:\n1. Deite-se confortavelmente\n2. Contraia e relaxe:\n   - Pés 🦶\n   - Panturrilhas\n   - Coxas 🦵\n   - Barriga\n   - Mãos ✋\n   - Ombros\n   - Rosto 🙂\n\n⚠️ Não force articulações doloridas."
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-
-        <TextView
-            android:text="Toque Calmante (5 min)"
-            android:textStyle="bold"
-            android:textSize="18sp"
-            android:layout_marginTop="20dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-
-        <TextView
-            android:text="Como fazer:\n1. Esquente as mãos esfregando 🤲🔥\n2. Coloque nas áreas doloridas\n3. Faça movimentos circulares suaves 🔄\n4. Respire profundamente 🌬️\n5. Imagine o calor aliviando a dor\n\n💡 Dica: Pode usar óleo morno."
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-
-        <TextView
-            android:text="⚠️ Alertas de Segurança"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:layout_marginTop="30dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-
-        <TextView
-            android:layout_width="wrap_content"
+        <!-- CABEÇALHO -->
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="• Pare se sentir tontura intensa 😵\n• Não force se tiver dor ❌\n• Consulte seu médico se tiver dúvidas 👨‍⚕️"
-            android:textSize="16sp" />
+            android:orientation="vertical"
+            android:padding="24dp"
+            android:layout_marginHorizontal="8dp"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/bg_quadrado_degrade"
+            android:elevation="4dp">
+
+            <TextView
+                android:text="Técnicas de Alívio"
+                android:textSize="28sp"
+                android:textColor="@android:color/white"
+                android:textStyle="bold"
+                android:layout_marginBottom="4dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:text="Práticas integrativas para seu bem-estar"
+                android:textColor="@android:color/white"
+                android:textSize="16sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+        <!-- CARD: ALONGAMENTO DE MÃOS -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="12dp"
+            android:layout_marginBottom="16dp"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="1dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:text="Alongamento de Mãos"
+                    android:textSize="20sp"
+                    android:textColor="@color/dark_blue"
+                    android:textStyle="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:text="5 minutos"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="12dp"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="10dp"
+                    android:background="@drawable/bg_quadrado_degrade_claro">
+
+                    <TextView
+                        android:text="Bom para: "
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/dark_green"
+                        android:textStyle="bold"/>
+
+                    <TextView
+                        android:text="Rigidez matinal nas mãos e nos dedos"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/dark_green"/>
+                </LinearLayout>
+
+                <TextView
+                    android:text="Como fazer:\n1. Sente-se confortavelmente\n2. Abra as mãos devagar\n3. Feche formando punho suave\n4. Repita 10 vezes\n5. Descanse"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:lineSpacingMultiplier="1.2"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginTop="12dp"
+                    android:padding="10dp"
+                    android:background="@drawable/bg_quadrado_vermelho">
+                    <TextView
+                        android:text="⚠ Atenção: Pare se sentir dor forte. O alongamento deve ser suave."
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/dark_red"/>
+                </LinearLayout>
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- CARD: RESPIRAÇÃO PROFUNDA -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="12dp"
+            android:layout_marginBottom="16dp"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="1dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:text="Respiração Profunda"
+                    android:textSize="20sp"
+                    android:textColor="@color/dark_blue"
+                    android:textStyle="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:text="5 minutos"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="12dp"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="10dp"
+                    android:background="@drawable/bg_quadrado_azul">
+
+                    <TextView
+                        android:text="Benefícios: "
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/dark_blue"
+                        android:textStyle="bold"/>
+                    <TextView
+                        android:text="Reduz tensão e ansiedade"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/dark_blue"/>
+                </LinearLayout>
+
+                <TextView
+                    android:text="Como fazer:\n1. Sente-se ou deite\n2. Mão na barriga\n3. Inspire pelo nariz (conte até 4)\n4. Expire pela boca (conte até 6)\n5. Repita 10 vezes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:lineSpacingMultiplier="1.2"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="12dp"
+                    android:padding="10dp"
+                    android:background="@drawable/bg_quadrado_amarelo">
+
+                    <TextView
+                        android:text="💡 Dica: "
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/brown_yellow"
+                        android:textStyle="bold"/>
+                    <TextView
+                        android:text="Faça antes de dormir para relaxar."
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/brown_yellow"/>
+                </LinearLayout>
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- CARD: RESPIRAÇÃO 4-7-8 -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="12dp"
+            android:layout_marginBottom="16dp"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="1dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:text="Respiração 4-7-8"
+                    android:textSize="20sp"
+                    android:textColor="@color/dark_blue"
+                    android:textStyle="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:text="3-5 minutos"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="12dp"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="10dp"
+                    android:background="@drawable/bg_quadrado_azul">
+
+                    <TextView
+                        android:text="Benefícios: "
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/dark_blue"
+                        android:textStyle="bold"/>
+                    <TextView
+                        android:text="Acalma a mente e ajuda a dormir"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/dark_blue"/>
+                </LinearLayout>
+
+                <TextView
+                    android:text="Como fazer:\n1. Inspire pelo nariz (até 4)\n2. Segure o ar (até 7)\n3. Expire pela boca (até 8)\n4. Repita por 4 ciclos"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:lineSpacingMultiplier="1.2"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="12dp"
+                    android:padding="10dp"
+                    android:background="@drawable/bg_quadrado_amarelo">
+
+                    <TextView
+                        android:text="⚠ Atenção: "
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/brown_yellow"
+                        android:textStyle="bold"/>
+                    <TextView
+                        android:text="Pode causar leve tontura no início."
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/brown_yellow"/>
+                </LinearLayout>
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- CARD: SUSPIRO DE ALÍVIO -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="12dp"
+            android:layout_marginBottom="16dp"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="1dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:text="Suspiro de Alívio 😮‍💨"
+                    android:textSize="20sp"
+                    android:textColor="@color/dark_blue"
+                    android:textStyle="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:text="2 minutos"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="12dp"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="10dp"
+                    android:background="@drawable/bg_quadrado_azul">
+
+                    <TextView
+                        android:text="Benefícios: "
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/dark_blue"
+                        android:textStyle="bold"/>
+
+                    <TextView
+                        android:text="Libera tensão física e mental rapidamente"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/dark_blue"/>
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:lineSpacingMultiplier="1.2"
+                    android:text="Como fazer:\n1. Inspire profundamente pelo nariz\n2. Solte o ar com um suspiro sonoro\n3. Deixe os ombros relaxarem\n4. Repita 5 vezes" />
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- CARD: RELAXAMENTO MUSCULAR -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="12dp"
+            android:layout_marginBottom="16dp"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="1dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:text="Relaxamento Muscular 💤"
+                    android:textSize="20sp"
+                    android:textColor="@color/dark_blue"
+                    android:textStyle="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:text="10-15 minutos"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="12dp"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="10dp"
+                    android:background="@drawable/bg_quadrado_azul">
+
+                    <TextView
+                        android:text="Benefícios: "
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/dark_blue"
+                        android:textStyle="bold"/>
+
+                    <TextView
+                        android:text="Reduz tensão e promove relaxamento"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/dark_blue"/>
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:lineSpacingMultiplier="1.2"
+                    android:text="Como fazer:\n1. Deite-se confortavelmente\n2. Contraia e relaxe cada grupo muscular:\n   - Pés 🦶, Pernas 🦵, Mãos ✋, Rosto 🙂..." />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="12dp"
+                    android:padding="10dp"
+                    android:background="@drawable/bg_quadrado_vermelho">
+
+                    <TextView
+                        android:text="⚠ Atenção: "
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/dark_red"
+                        android:textStyle="bold"/>
+
+                    <TextView
+                        android:text="Não force articulações doloridas."
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/dark_red"/>
+                </LinearLayout>
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- CARD: TOQUE CALMANTE -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="12dp"
+            android:layout_marginBottom="16dp"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="1dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="15dp">
+
+                <TextView
+                    android:text="Toque Calmante 🤲"
+                    android:textSize="20sp"
+                    android:textColor="@color/dark_blue"
+                    android:textStyle="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:text="5 minutos"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="12dp"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="10dp"
+                    android:background="@drawable/bg_quadrado_degrade_claro">
+
+                    <TextView
+                        android:text="Bom para: "
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/dark_green"
+                        android:textStyle="bold"/>
+
+                    <TextView
+                        android:text="Alívio localizado em áreas de dor"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/dark_green"/>
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:lineSpacingMultiplier="1.2"
+                    android:text="Como fazer:\n1. Esquente as mãos esfregando-as\n2. Coloque-as suavemente na área dolorida\n3. Faça movimentos circulares 🔄\n4. Respire imaginando o calor aliviar a dor" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="12dp"
+                    android:padding="10dp"
+                    android:background="@drawable/bg_quadrado_amarelo">
+
+                    <TextView
+                        android:text="💡 Dica: "
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/brown_yellow"
+                        android:textStyle="bold"/>
+
+                    <TextView
+                        android:text="Pode usar óleo de massagem morno."
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/brown_yellow"/>
+                </LinearLayout>
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- CARD: ALERTAS GERAIS DE SEGURANÇA -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="12dp"
+            android:layout_marginBottom="16dp"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="1dp"
+            app:cardBackgroundColor="@color/light_red">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="30dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="🚨 Alertas de Segurança"
+                    android:textSize="20sp"
+                    android:textColor="@color/dark_red"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="8dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="• Pare se sentir dor forte ou tontura.\n• Não force nenhuma articulação.\n• Consulte seu médico antes de iniciar.\n• Comece devagar e respeite seus limites."
+                    android:textColor="@color/dark_red"
+                    android:textSize="16sp"
+                    android:lineSpacingMultiplier="1.2"/>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
 
     </LinearLayout>
-
 </ScrollView>
