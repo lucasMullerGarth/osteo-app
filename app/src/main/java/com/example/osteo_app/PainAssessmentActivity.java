@@ -3,11 +3,12 @@ package com.example.osteo_app;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import com.example.osteo_app.databinding.ActivityPainAssessmentBinding;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.text.SimpleDateFormat;
@@ -17,18 +18,26 @@ import java.util.Locale;
 public class PainAssessmentActivity extends AppCompatActivity {
     private SeekBar seekPain;
     private TextView txtPainLevel, txtPainDescription;
-    private TextView txtResumoData, txtResumoNivel, txtResumoPontos;
+    private TextView txtResumoData, txtResumoNivel;
+    private Button btnSalvar;
+    private PainAssessmentDAO painAssessmentDAO;
+    private UsuarioDAO usuarioDAO;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pain_assessment);
 
+        painAssessmentDAO = new PainAssessmentDAO(this);
+        usuarioDAO = new UsuarioDAO(this);
+
         seekPain = findViewById(R.id.seekPain);
         txtPainLevel = findViewById(R.id.txtPainLevel);
         txtPainDescription = findViewById(R.id.txtPainDescription);
         txtResumoData = findViewById(R.id.txtResumoData);
         txtResumoNivel = findViewById(R.id.txtResumoNivel);
+        btnSalvar = findViewById(R.id.btnSalvar);
+
         txtPainLevel.setText("0");
         txtPainDescription.setText("Sem dor");
 
@@ -59,7 +68,24 @@ public class PainAssessmentActivity extends AppCompatActivity {
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {}
+        });
 
+        btnSalvar.setOnClickListener(v -> {
+            Usuario usuario = usuarioDAO.getUsuario();
+            if (usuario == null) {
+                Toast.makeText(this, "Crie um perfil antes de salvar a avaliação.", Toast.LENGTH_LONG).show();
+                startActivity(new Intent(this, MainActivity.class));
+                return;
+            }
+
+            int nivelDor = seekPain.getProgress();
+            long id = painAssessmentDAO.inserirAvaliacao(usuario.getId(), dataAtual, nivelDor);
+
+            if (id > 0) {
+                Toast.makeText(this, "Avaliação de dor salva com sucesso!", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(this, "Erro ao salvar a avaliação.", Toast.LENGTH_SHORT).show();
+            }
         });
 
         /*Barra de navegação inferior*/
