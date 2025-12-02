@@ -1,23 +1,114 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:padding="16dp">
 
     <LinearLayout
         android:orientation="vertical"
-        android:padding="16dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <TextView
-            android:text="Técnicas de Alívio"
+            android:text="💆‍♂️ Técnicas de Alívio"
             android:textSize="24sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="12dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:text="🖐️ Alongamento de Mãos (5 min)"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:layout_marginTop="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
         <TextView
-            android:text="Lista de técnicas..."
+            android:text="Bom para: Rigidez matinal 🌅\n\nComo fazer:\n1. Sente-se confortavelmente\n2. Abra as mãos devagar\n3. Feche formando punho suave\n4. Repita 10 vezes\n5. Descanse\n\n⚠️ ATENÇÃO: Pare se sentir dor forte."
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
+
+        <TextView
+            android:text="🌬️ Respiração Profunda (5 min)"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:layout_marginTop="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:text="Reduz tensão e ansiedade 😌\n\nComo fazer:\n1. Sente-se ou deite\n2. Coloque uma mão na barriga\n3. Inspire pelo nariz (conte até 4)\n4. Sinta a barriga subir\n5. Expire pela boca (conte até 6)\n6. Repita 10 vezes\n\n💡 Dica: Faça antes de dormir."
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:text="Respiração 4-7-8 (3–5 min)"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:layout_marginTop="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:text="Acalma e melhora o sono 😴\n\nComo fazer:\n1. Inspire pelo nariz contando até 4\n2. Segure o ar contando até 7\n3. Expire pela boca contando até 8\n4. Faça 4 ciclos\n\n⚠️ Atenção: Pode causar leve tontura no início."
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:text="😮‍💨 Suspiro de Alívio (2 min)"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:layout_marginTop="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:text="Como fazer:\n1. Inspire profundamente pelo nariz\n2. Solte o ar com um suspiro sonoro 😮‍💨\n3. Deixe os ombros relaxarem\n4. Repita 5 vezes dizendo \"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:text="💤 Relaxamento Muscular (10–15 min)"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:layout_marginTop="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:text="Como fazer:\n1. Deite-se confortavelmente\n2. Contraia e relaxe:\n   - Pés 🦶\n   - Panturrilhas\n   - Coxas 🦵\n   - Barriga\n   - Mãos ✋\n   - Ombros\n   - Rosto 🙂\n\n⚠️ Não force articulações doloridas."
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:text="Toque Calmante (5 min)"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:layout_marginTop="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:text="Como fazer:\n1. Esquente as mãos esfregando 🤲🔥\n2. Coloque nas áreas doloridas\n3. Faça movimentos circulares suaves 🔄\n4. Respire profundamente 🌬️\n5. Imagine o calor aliviando a dor\n\n💡 Dica: Pode usar óleo morno."
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:text="⚠️ Alertas de Segurança"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_marginTop="30dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="• Pare se sentir tontura intensa 😵\n• Não force se tiver dor ❌\n• Consulte seu médico se tiver dúvidas 👨‍⚕️"
+            android:textSize="16sp" />
+
     </LinearLayout>
+
 </ScrollView>

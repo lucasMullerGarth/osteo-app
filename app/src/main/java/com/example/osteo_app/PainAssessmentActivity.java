@@ -3,40 +3,64 @@ package com.example.osteo_app;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.widget.SeekBar;
+import android.widget.TextView;
+
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.osteo_app.databinding.ActivityPainAssessmentBinding;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class PainAssessmentActivity extends AppCompatActivity {
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
-    private ActivityPainAssessmentBinding binding;
+public class PainAssessmentActivity extends AppCompatActivity {
+    private SeekBar seekPain;
+    private TextView txtPainLevel, txtPainDescription;
+    private TextView txtResumoData, txtResumoNivel, txtResumoPontos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivityPainAssessmentBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
+        setContentView(R.layout.activity_pain_assessment);
 
-        BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation_bar);
-        bottomNav.setSelectedItemId(R.id.nav_pain);
-        bottomNav.setOnItemSelectedListener(item -> {
-            int itemId = item.getItemId();
-            if (itemId == R.id.nav_relief) {
-                startActivity(new Intent(this, HomeActivity.class));
-                return true;
-            } else if (itemId == R.id.nav_pain) {
-                return true; // Already on this screen
-            } else if (itemId == R.id.nav_profile) {
-                SharedPreferences prefs = getSharedPreferences("prefs", MODE_PRIVATE);
-                boolean isProfileCreated = prefs.getBoolean("isProfileCreated", false);
-                if (isProfileCreated) {
-                    startActivity(new Intent(this, PerfilActivity.class));
+        seekPain = findViewById(R.id.seekPain);
+        txtPainLevel = findViewById(R.id.txtPainLevel);
+        txtPainDescription = findViewById(R.id.txtPainDescription);
+        txtResumoData = findViewById(R.id.txtResumoData);
+        txtResumoNivel = findViewById(R.id.txtResumoNivel);
+        txtPainLevel.setText("0");
+        txtPainDescription.setText("Sem dor");
+
+        String dataAtual = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(new Date());
+        txtResumoData.setText("Data: " + dataAtual);
+
+        seekPain.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                txtPainLevel.setText(String.valueOf(progress));
+                txtResumoNivel.setText("Nível de dor numérico: " + progress + "/10");
+
+                if (progress == 0) {
+                    txtPainDescription.setText("Sem dor");
+                } else if (progress <= 3) {
+                    txtPainDescription.setText("Dor leve");
+                } else if (progress <= 6) {
+                    txtPainDescription.setText("Dor moderada");
+                } else if (progress <= 8) {
+                    txtPainDescription.setText("Dor forte");
                 } else {
-                    startActivity(new Intent(this, MainActivity.class));
+                    txtPainDescription.setText("Dor intensa");
                 }
-                return true;
             }
-            return false;
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {}
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {}
         });
     }
+
+    
 }

@@ -1,23 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:padding="16dp">
 
     <LinearLayout
         android:orientation="vertical"
-        android:padding="16dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+        <!-- TÍTULO -->
         <TextView
-            android:text="Educação"
-            android:textSize="24sp"
+            android:text="🦴 Entendendo Sua Condição: Osteoartrite"
+            android:textSize="26sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <!-- O QUE ACONTECE -->
+        <TextView
+            android:text="🔎 O que acontece?"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="8dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
         <TextView
-            android:text="Conteúdo educativo..."
+            android:text="A osteoartrite (artrose) é o desgaste natural da cartilagem que protege as articulações. Com o tempo, os ossos ficam mais próximos, causando dor e rigidez.\n\n🛞 Pense assim: é como o desgaste de um pneu — com o uso, a proteção diminui.\n\n✔️ IMPORTANTE SABER:\n• Muito comum após os 60 anos\n• NÃO é culpa sua\n• Tem tratamento e controle\n• É possível viver bem com osteoartrite\n\n🦵 Articulações mais afetadas:\n• Joelhos\n• Mãos e dedos\n• Quadril\n• Coluna\n• Pés"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"/>
+
+        <!-- RECONHECENDO SINAIS -->
+        <TextView
+            android:text="📌 Reconhecendo os Sinais"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="8dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
+
+        <TextView
+            android:text="Sintomas principais:\n✓ Dor nas articulações (piora com movimento)\n✓ Rigidez matinal (melhora em 30 min)\n✓ Inchaço leve\n✓ Estalos\n✓ Dificuldade em tarefas simples\n✓ Sensação de travamento\n\n📅 Padrão comum:\n• Manhã: mais rígido\n• Tarde: melhora com movimento\n• Noite: pode doer após atividades\n\nA dor varia — dias bons e ruins são normais!\n\n🚨 Procure ajuda URGENTE se houver:\n• Dor súbita e intensa\n• Inchaço grande e vermelhidão\n• Febre com dor\n• Incapacidade de mover"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"/>
+
+        <!-- POR QUE ACONTECE -->
+        <TextView
+            android:text="❓ Por que acontece?"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"/>
+
+        <TextView
+            android:text="Causas principais:\n• Idade\n• Uso repetitivo\n• Lesões anteriores\n• Sobrepeso\n• Genética\n• Postura\n\n🎯 Fatores que você pode controlar:\n✔️ Peso corporal\n✔️ Atividade física\n✔️ Postura\n✔️ Proteção articular\n✔️ Alimentação saudável"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"/>
+
+        <!-- TRATAMENTO -->
+        <TextView
+            android:text="💊 Opções de Tratamento"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"/>
+
+        <TextView
+            android:text="Objetivo: reduzir dor e manter movimento.\n\nA) MEDICAMENTOS:\n• Analgésicos\n• Anti-inflamatórios\n• Pomadas e géis\n• Suplementos\n\nB) PRÁTICAS INTEGRATIVAS (PICs):\n✨ Este app foca nesses métodos!\n• Exercícios adaptados\n• Termoterapia\n• Acupuntura\n• Yoga / Tai Chi\n• Massagem\n• Fitoterapia\n\nC) FISIOTERAPIA:\n• Fortalecimento\n• Mobilidade\n• Proteção articular\n\nD) ESTILO DE VIDA:\n• Perda de peso\n• Alimentação anti-inflamatória\n• Exercícios\n• Adaptações no dia a dia\n\nE) TRATAMENTOS AVANÇADOS:\n• Infiltrações\n• Viscossuplementação\n• Cirurgias\n\n🤝 Abordagem integrada → combinar tratamentos!"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"/>
+
+        <!-- ALIMENTAÇÃO -->
+        <TextView
+            android:text="🥗 Comendo para Aliviar"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="8dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:text="Alimentos AMIGOS:\n• Peixes ricos em ômega 3\n• Azeite de oliva\n• Vegetais verde-escuros\n• Frutas vermelhas\n• Alho e cebola\n• Gengibre e cúrcuma 🫚\n• Castanhas\n• Frutas cítricas\n\nEvitar ou reduzir:\n❌ Açúcar\n❌ Frituras\n❌ Ultraprocessados\n❌ Álcool em excesso\n❌ Sal demais\n\n💧 Hidratação: 6–8 copos/dia\n\nChás recomendados:\n• Verde\n• Gengibre\n• Cúrcuma\n• Cavalinha\n\n⚠️ Consulte um médico antes de mudanças grandes."
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"/>
+
+        <!-- ADAPTAÇÕES PRÁTICAS -->
+        <TextView
+            android:text="🛠️ Adaptações Práticas"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="8dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:text="Na cozinha:\n• Cabos grossos\n• Abridores automáticos\n• Banqueta\n• Objetos na altura dos olhos\n\nNo banheiro:\n• Barras de apoio\n• Tapete antiderrapante\n• Banco no banho\n• Assento elevado\n\nNo quarto:\n• Colchão firme\n• Travesseiro adequado\n• Alças para levantar\n• Luz noturna\n\nCalçados:\n• Solado antiderrapante\n• Salto baixo\n• Amortecimento\n• Fecho fácil\n\nMovimentação:\n• Bengala/andador se necessário\n• Levante-se devagar\n• Pausas durante atividades\n\nProteção articular:\n• Carregue peso perto do corpo\n• Use carrinhos\n• Empurre portas com o corpo\n• Use as duas mãos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"/>
+
+        <!-- CUIDANDO DA MENTE -->
+        <TextView
+            android:text="🧠 Cuidando da Mente"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="8dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:text="É normal sentir:\n• Frustração\n• Medo\n• Tristeza\n• Ansiedade\n\nVocê não está sozinho!\nMilhões convivem bem com osteoartrite.\n\nEstratégias:\n✓ Foque no que pode fazer\n✓ Celebre pequenas vitórias\n✓ Mantenha hobbies\n✓ Peça ajuda\n✓ Grupos de apoio\n✓ Pratique gratidão\n\nAtividades que ajudam:\n• Meditação\n• Conversas\n• Atividades prazerosas\n• Voluntariado\n• Aprender coisas novas\n\n⚠️ Procure psicólogo se houver:\n• Tristeza constante\n• Perda de interesse\n• Isolamento\n• Pensamentos negativos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"/>
+
+        <!-- SINAIS DE ALERTA -->
+        <TextView
+            android:text="🚨 Sinais de Alerta"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="8dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:text="Marque consulta se:\n• Dor não melhora\n• Dificuldade crescente\n• Efeitos colaterais\n• Dúvidas sobre tratamento\n• Piora progressiva\n\nProcure URGÊNCIA se:\n• Dor súbita\n• Inchaço grande\n• Febre\n• Incapacidade total\n• Deformidade repentina\n\nConsultas regulares ajudam no ajuste do tratamento."
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"/>
+
+        <!-- QUALIDADE DE VIDA -->
+        <TextView
+            android:text="🌟 Qualidade de Vida"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"/>
+
+        <TextView
+            android:text="Princípios:\n• Movimento é remédio\n• Equilíbrio é essencial\n• Atitude positiva ajuda\n• Apoio social importa\n• Aprendizado empodera\n\nMetas:\n• Pequenos passos\n• Celebre progressos\n• Ajuste conforme necessário\n• Seja gentil consigo mesmo\n\nAcompanhe sua evolução:\n• Use este app!\n• Registre dor e atividades\n• Observe padrões\n• Compartilhe com o médico\n\n✨ Você é protagonista do seu bem-estar!\n“Osteoartrite é parte de você, mas NÃO define quem você é.”"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
     </LinearLayout>
 
