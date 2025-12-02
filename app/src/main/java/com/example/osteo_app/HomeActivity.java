@@ -3,6 +3,8 @@ package com.example.osteo_app;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.View;
+
 import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -18,7 +20,6 @@ public class HomeActivity extends AppCompatActivity {
         bottomNav.setOnItemSelectedListener(item -> {
             int itemId = item.getItemId();
             if (itemId == R.id.nav_relief) {
-                // Already on this screen
                 return true;
             } else if (itemId == R.id.nav_pain) {
                 startActivity(new Intent(this, PainAssessmentActivity.class));
@@ -35,5 +36,15 @@ public class HomeActivity extends AppCompatActivity {
             }
             return false;
         });
+    }
+
+    public void chamarTelaAlivio(View view) {
+        Intent intent = new Intent(this, ReliefTechniquesActivity.class);
+        startActivity(intent);
+    }
+
+    public void chamarTelaEducacao(View view) {
+        Intent intent = new Intent(this, EducationActivity.class);
+        startActivity(intent);
     }
 }

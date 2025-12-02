@@ -47,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
         anoDiagnosticoEditText = findViewById(R.id.edit_text_ano_diagnostico);
         celularEditText = findViewById(R.id.edit_text_celular);
         generoRadioGroup = findViewById(R.id.radio_group_genero);
+        cadastrarButton = findViewById(R.id.botao_cadastrar);
 
         comorbidadeCheckboxes = Arrays.asList(
                 (CheckBox) findViewById(R.id.cb_artrite_reumatoide),
@@ -57,6 +58,8 @@ public class MainActivity extends AppCompatActivity {
                 (CheckBox) findViewById(R.id.cb_diabetes),
                 (CheckBox) findViewById(R.id.cb_hipertensao)
         );
+
+        cadastrarButton.setOnClickListener(this::SalvarCadastro);
 
         BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation_bar);
         bottomNav.setSelectedItemId(R.id.nav_profile);

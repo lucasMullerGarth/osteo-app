@@ -51,12 +51,14 @@
                 android:layout_height="wrap_content"/>
 
             <Button
+                android:onClick="chamarTelaEducacao"
                 android:id="@+id/btnEducation"
                 android:text="Educação"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
             <Button
+                android:onClick="chamarTelaAlivio"
                 android:id="@+id/btnRelief"
                 android:text="Técnicas de Alívio"
                 android:layout_width="match_parent"
