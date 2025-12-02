@@ -10,6 +10,7 @@
     <color name="blue_green">#009599</color>
     <color name="dark_green">#003C0E</color>
     <color name="red">#FF3D3D</color>
+    <color name="light_red">#FFD4D4</color>
     <color name="dark_red">#760B0B</color>
     <color name="yellow">#FFD700</color>
     <color name="brown_yellow">#905E00</color>
