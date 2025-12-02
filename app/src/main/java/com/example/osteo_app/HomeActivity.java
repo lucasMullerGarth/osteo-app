@@ -11,18 +11,16 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class HomeActivity extends AppCompatActivity {
 
-    private Button tecnicasdealivioButton;
-    private Button educacaoButton;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        tecnicasdealivioButton = findViewById(R.id.btnRelief);
-        educacaoButton = findViewById(R.id.btnEducation);
 
-        tecnicasdealivioButton.setOnClickListener(view -> chamarTelaAlivio(view));
-        educacaoButton.setOnClickListener(view -> chamarTelaEducacao(view));
+        Button btnEducation = findViewById(R.id.btnEducation);
+        Button btnRelief = findViewById(R.id.btnRelief);
+
+        btnEducation.setOnClickListener(v -> startActivity(new Intent(this, EducationActivity.class)));
+        btnRelief.setOnClickListener(v -> startActivity(new Intent(this, ReliefTechniquesActivity.class)));
 
         BottomNavigationView bottomNav = findViewById(R.id.bottomNav);
 
@@ -45,15 +43,5 @@ public class HomeActivity extends AppCompatActivity {
             }
             return false;
         });
-    }
-
-    public void chamarTelaAlivio(View view) {
-        Intent intent = new Intent(this, ReliefTechniquesActivity.class);
-        startActivity(intent);
-    }
-
-    public void chamarTelaEducacao(View view) {
-        Intent intent = new Intent(this, EducationActivity.class);
-        startActivity(intent);
     }
 }
