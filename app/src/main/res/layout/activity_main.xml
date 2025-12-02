@@ -196,7 +196,6 @@
 
             <Button
                 android:id="@+id/botao_cadastrar"
-                android:onClick="SalvaCadastro"
                 android:layout_marginTop="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

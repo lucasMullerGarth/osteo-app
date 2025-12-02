@@ -7,6 +7,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class PerfilActivity extends AppCompatActivity {
 
@@ -50,6 +51,22 @@ public class PerfilActivity extends AppCompatActivity {
             startActivity(intent);
             finish();
         });
+
+        BottomNavigationView bottomNav = findViewById(R.id.bottomNav);
+        bottomNav.setSelectedItemId(R.id.nav_profile);
+        bottomNav.setOnItemSelectedListener(item -> {
+            int itemId = item.getItemId();
+            if (itemId == R.id.nav_relief) {
+                startActivity(new Intent(this, HomeActivity.class));
+                return true;
+            } else if (itemId == R.id.nav_pain) {
+                startActivity(new Intent(this, PainAssessmentActivity.class));
+                return true;
+            } else if (itemId == R.id.nav_profile) {
+                return true; // Already on this screen
+            }
+            return false;
+        });
     }
 
     private void loadUserProfile() {
@@ -66,8 +83,12 @@ public class PerfilActivity extends AppCompatActivity {
             textViewGenero.setText("Gênero: " + usuario.getGenero());
             textViewComorbidades.setText("Comorbidades: " + usuario.getComorbidades());
         } else {
-            Toast.makeText(this, "Nenhum perfil encontrado!", Toast.LENGTH_SHORT).show();
-            finish(); // Go back to MainActivity if no profile found
+            // This part is a safeguard, as the user should only get here if a profile exists.
+            Toast.makeText(this, "Nenhum perfil encontrado! Redirecionando para o cadastro.", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(this, MainActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+            finish();
         }
     }
 }

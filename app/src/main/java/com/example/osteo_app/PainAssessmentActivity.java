@@ -59,6 +59,29 @@ public class PainAssessmentActivity extends AppCompatActivity {
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {}
+
+        });
+        /*Barra de navegação inferior*/
+        BottomNavigationView bottomNav = findViewById(R.id.bottomNav);
+
+        bottomNav.setOnItemSelectedListener(item -> {
+            int itemId = item.getItemId();
+            if (itemId == R.id.nav_relief) {
+                startActivity(new Intent(this, HomeActivity.class));
+                return true;
+            } else if (itemId == R.id.nav_pain) {
+                return true;
+            } else if (itemId == R.id.nav_profile) {
+                SharedPreferences prefs = getSharedPreferences("prefs", MODE_PRIVATE);
+                boolean isProfileCreated = prefs.getBoolean("isProfileCreated", false);
+                if (isProfileCreated) {
+                    startActivity(new Intent(this, PerfilActivity.class));
+                } else {
+                    startActivity(new Intent(this, MainActivity.class));
+                }
+                return true;
+            }
+            return false;
         });
     }
 
