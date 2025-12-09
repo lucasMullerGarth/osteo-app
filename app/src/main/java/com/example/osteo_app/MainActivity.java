@@ -1,7 +1,6 @@
 package com.example.osteo_app;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -12,6 +11,7 @@ import android.widget.RadioGroup;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.database.DatabaseError;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -26,22 +26,36 @@ public class MainActivity extends AppCompatActivity {
     private RadioGroup generoRadioGroup;
     private Button cadastrarButton;
     private List<CheckBox> comorbidadeCheckboxes;
+    private UsuarioDAO usuarioDAO;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        SharedPreferences prefs = getSharedPreferences("prefs", MODE_PRIVATE);
-        boolean isProfileCreated = prefs.getBoolean("isProfileCreated", false);
+        usuarioDAO = new UsuarioDAO();
+        usuarioDAO.getUsuario(new UsuarioDAO.UsuarioCallback() {
+            @Override
+            public void onUsuarioLoaded(Usuario usuario) {
+                if (usuario != null) {
+                    startActivity(new Intent(MainActivity.this, PerfilActivity.class));
+                    finish();
+                } else {
+                    // A IU de cadastro será exibida se não houver usuário
+                    setContentView(R.layout.activity_main);
+                    setupUI();
+                }
+            }
 
-        if (isProfileCreated) {
-            startActivity(new Intent(this, PerfilActivity.class));
-            finish();
-            return;
-        }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                // Tratar erro
+                setContentView(R.layout.activity_main);
+                setupUI();
+            }
+        });
+    }
 
-        setContentView(R.layout.activity_main);
-
+    private void setupUI() {
         nomeEditText = findViewById(R.id.edit_text_nome);
         idadeEditText = findViewById(R.id.edit_text_idade);
         anoDiagnosticoEditText = findViewById(R.id.edit_text_ano_diagnostico);
@@ -50,13 +64,13 @@ public class MainActivity extends AppCompatActivity {
         cadastrarButton = findViewById(R.id.botao_cadastrar);
 
         comorbidadeCheckboxes = Arrays.asList(
-                (CheckBox) findViewById(R.id.cb_artrite_reumatoide),
-                (CheckBox) findViewById(R.id.cb_espondilite),
-                (CheckBox) findViewById(R.id.cb_lupus),
-                (CheckBox) findViewById(R.id.cb_gota),
-                (CheckBox) findViewById(R.id.cb_fibromialgia),
-                (CheckBox) findViewById(R.id.cb_diabetes),
-                (CheckBox) findViewById(R.id.cb_hipertensao)
+                findViewById(R.id.cb_artrite_reumatoide),
+                findViewById(R.id.cb_espondilite),
+                findViewById(R.id.cb_lupus),
+                findViewById(R.id.cb_gota),
+                findViewById(R.id.cb_fibromialgia),
+                findViewById(R.id.cb_diabetes),
+                findViewById(R.id.cb_hipertensao)
         );
 
         cadastrarButton.setOnClickListener(this::SalvarCadastro);
@@ -118,28 +132,18 @@ public class MainActivity extends AppCompatActivity {
         }
         String comorbidadesSelecionadas = String.join(", ", comorbidadesList);
 
-        UsuarioDAO usuarioDAO = new UsuarioDAO(this);
+        usuarioDAO.inserirUsuario(nome, idade, anoDiagnostico, celular, genero, comorbidadesSelecionadas, new UsuarioDAO.UsuarioSaveCallback() {
+            @Override
+            public void onUsuarioSaved() {
+                Toast.makeText(MainActivity.this, "Usuário salvo com sucesso!", Toast.LENGTH_LONG).show();
+                startActivity(new Intent(MainActivity.this, PerfilActivity.class));
+                finish();
+            }
 
-        long id = usuarioDAO.inserirUsuario(
-                nome,
-                idade,
-                anoDiagnostico,
-                celular,
-                genero,
-                comorbidadesSelecionadas
-        );
-
-        if (id > 0) {
-            SharedPreferences prefs = getSharedPreferences("prefs", MODE_PRIVATE);
-            SharedPreferences.Editor editor = prefs.edit();
-            editor.putBoolean("isProfileCreated", true);
-            editor.apply();
-
-            Toast.makeText(this, "Usuário salvo com ID: " + id, Toast.LENGTH_LONG).show();
-            startActivity(new Intent(this, PerfilActivity.class));
-            finish();
-        } else {
-            Toast.makeText(this, "Erro ao salvar no banco!", Toast.LENGTH_LONG).show();
-        }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Toast.makeText(MainActivity.this, "Erro ao salvar no banco!", Toast.LENGTH_LONG).show();
+            }
+        });
     }
 }

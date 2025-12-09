@@ -1,55 +1,76 @@
 package com.example.osteo_app;
 
-import android.content.ContentValues;
-import android.content.Context;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.util.Pair;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class PainAssessmentDAO {
 
-    private DataBaseHelper dbHelper;
+    private DatabaseReference databaseReference;
+    private FirebaseAuth firebaseAuth;
 
-    public PainAssessmentDAO(Context context) {
-        dbHelper = new DataBaseHelper(context);
+    public interface PainAssessmentCallback {
+        void onAssessmentsLoaded(List<Pair<String, Integer>> assessments);
+        void onCancelled(DatabaseError databaseError);
     }
 
-    public long inserirAvaliacao(long usuarioId, String data, int nivelDor) {
-        SQLiteDatabase db = dbHelper.getWritableDatabase();
-
-        ContentValues values = new ContentValues();
-        values.put("usuario_id", usuarioId);
-        values.put("data_registro", data);
-        values.put("escala_dor", nivelDor);
-
-        long id = db.insert(DataBaseHelper.TABLE_DOR, null, values);
-
-        db.close();
-        return id;
+    public interface PainAssessmentSaveCallback {
+        void onAssessmentSaved();
+        void onCancelled(DatabaseError databaseError);
     }
 
-    public List<Pair<String, Integer>> getAllPainAssessments(long usuarioId) {
-        List<Pair<String, Integer>> assessments = new ArrayList<>();
-        SQLiteDatabase db = dbHelper.getReadableDatabase();
-        Cursor cursor = db.query(
-                DataBaseHelper.TABLE_DOR,
-                new String[]{"data_registro", "escala_dor"},
-                "usuario_id = ?",
-                new String[]{String.valueOf(usuarioId)},
-                null, null, "data_registro ASC");
+    public PainAssessmentDAO() {
+        databaseReference = FirebaseDatabase.getInstance().getReference("pain_assessments");
+        firebaseAuth = FirebaseAuth.getInstance();
+    }
 
-        if (cursor != null) {
-            while (cursor.moveToNext()) {
-                String data = cursor.getString(cursor.getColumnIndexOrThrow("data_registro"));
-                int nivelDor = cursor.getInt(cursor.getColumnIndexOrThrow("escala_dor"));
-                assessments.add(new Pair<>(data, nivelDor));
-            }
-            cursor.close();
+    private String getUserId() {
+        FirebaseUser user = firebaseAuth.getCurrentUser();
+        if (user != null) {
+            return user.getUid();
+        } else {
+            return "user_teste_id";
         }
-        db.close();
-        return assessments;
+    }
+
+    public void inserirAvaliacao(String data, int nivelDor, PainAssessmentSaveCallback callback) {
+        String userId = getUserId();
+        String key = databaseReference.child(userId).push().getKey();
+        PainAssessment assessment = new PainAssessment(key, data, nivelDor);
+
+        databaseReference.child(userId).child(key).setValue(assessment)
+            .addOnSuccessListener(aVoid -> callback.onAssessmentSaved())
+            .addOnFailureListener(e -> callback.onCancelled(DatabaseError.fromException(e)));
+    }
+
+    public void getAllPainAssessments(PainAssessmentCallback callback) {
+        String userId = getUserId();
+        databaseReference.child(userId).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                List<Pair<String, Integer>> assessments = new ArrayList<>();
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    PainAssessment assessment = snapshot.getValue(PainAssessment.class);
+                    if (assessment != null) {
+                        assessments.add(new Pair<>(assessment.getDataRegistro(), assessment.getEscalaDor()));
+                    }
+                }
+                callback.onAssessmentsLoaded(assessments);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                callback.onCancelled(databaseError);
+            }
+        });
     }
 }

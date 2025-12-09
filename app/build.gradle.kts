@@ -43,9 +43,11 @@ dependencies {
     implementation(libs.navigation.fragment)
     implementation(libs.navigation.ui)
     implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
+    implementation(libs.firebase.auth)
     testImplementation(libs.junit)
     implementation(platform("com.google.firebase:firebase-bom:34.6.0"))
     implementation("com.google.firebase:firebase-analytics")
+    implementation("com.google.firebase:firebase-database") // Adicionado para o Realtime Database
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
 }

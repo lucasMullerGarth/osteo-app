@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.util.Pair;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.github.mikephil.charting.charts.LineChart;
@@ -12,6 +14,7 @@ import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
+import com.google.firebase.database.DatabaseError;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +22,6 @@ import java.util.List;
 public class HistoryActivity extends AppCompatActivity {
 
     private PainAssessmentDAO painAssessmentDAO;
-    private UsuarioDAO usuarioDAO;
     private TextView txtMediaDor, txtTendencia;
     private LineChart lineChart;
     private TextView txtRegistrosRecentes;
@@ -29,8 +31,7 @@ public class HistoryActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_history);
 
-        painAssessmentDAO = new PainAssessmentDAO(this);
-        usuarioDAO = new UsuarioDAO(this);
+        painAssessmentDAO = new PainAssessmentDAO();
 
         txtMediaDor = findViewById(R.id.txtMediaDor);
         txtTendencia = findViewById(R.id.txtTendencia);
@@ -44,58 +45,60 @@ public class HistoryActivity extends AppCompatActivity {
     }
 
     private void loadHistoryData() {
-        Usuario usuario = usuarioDAO.getUsuario();
-        if (usuario == null) {
-            // Tratar caso não haja usuário
-            return;
-        }
+        painAssessmentDAO.getAllPainAssessments(new PainAssessmentDAO.PainAssessmentCallback() {
+            @Override
+            public void onAssessmentsLoaded(List<Pair<String, Integer>> assessments) {
+                if (assessments.isEmpty()) {
+                    // Tratar caso não haja avaliações
+                    return;
+                }
 
-        List<Pair<String, Integer>> assessments = painAssessmentDAO.getAllPainAssessments(usuario.getId());
+                // Calcular Média
+                float media = 0;
+                for (Pair<String, Integer> assessment : assessments) {
+                    media += assessment.second;
+                }
+                media /= assessments.size();
+                txtMediaDor.setText(String.format("%.1f/10", media));
 
-        if (assessments.isEmpty()) {
-            // Tratar caso não haja avaliações
-            return;
-        }
+                // Calcular Tendência
+                if (assessments.size() > 1) {
+                    float tendencia = (float) (assessments.get(assessments.size() - 1).second - assessments.get(0).second) / assessments.size();
+                    txtTendencia.setText(String.format("%+.1f", tendencia));
+                }
 
-        // Calcular Média
-        float media = 0;
-        for (Pair<String, Integer> assessment : assessments) {
-            media += assessment.second;
-        }
-        media /= assessments.size();
-        txtMediaDor.setText(String.format("%.1f/10", media));
+                // Popular Gráfico
+                ArrayList<Entry> entries = new ArrayList<>();
+                final ArrayList<String> labels = new ArrayList<>();
+                for (int i = 0; i < assessments.size(); i++) {
+                    entries.add(new Entry(i, assessments.get(i).second));
+                    labels.add(assessments.get(i).first);
+                }
 
-        // Calcular Tendência
-        if (assessments.size() > 1) {
-            float tendencia = (float) (assessments.get(assessments.size() - 1).second - assessments.get(0).second) / assessments.size();
-            txtTendencia.setText(String.format("%+.1f", tendencia));
-        }
+                LineDataSet dataSet = new LineDataSet(entries, "Nível de Dor");
+                LineData lineData = new LineData(dataSet);
+                lineChart.setData(lineData);
 
-        // Popular Gráfico
-        ArrayList<Entry> entries = new ArrayList<>();
-        final ArrayList<String> labels = new ArrayList<>();
-        for (int i = 0; i < assessments.size(); i++) {
-            entries.add(new Entry(i, assessments.get(i).second));
-            labels.add(assessments.get(i).first);
-        }
+                XAxis xAxis = lineChart.getXAxis();
+                xAxis.setValueFormatter(new IndexAxisValueFormatter(labels));
+                xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+                xAxis.setGranularity(1f);
+                xAxis.setLabelRotationAngle(-45);
 
-        LineDataSet dataSet = new LineDataSet(entries, "Nível de Dor");
-        LineData lineData = new LineData(dataSet);
-        lineChart.setData(lineData);
+                lineChart.invalidate(); // refresh
 
-        XAxis xAxis = lineChart.getXAxis();
-        xAxis.setValueFormatter(new IndexAxisValueFormatter(labels));
-        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
-        xAxis.setGranularity(1f);
-        xAxis.setLabelRotationAngle(-45);
+                // Popular Registros Recentes
+                StringBuilder registros = new StringBuilder();
+                for (int i = assessments.size() - 1; i >= 0 && i >= assessments.size() - 5; i--) {
+                    registros.append(assessments.get(i).first).append(" - Nível: ").append(assessments.get(i).second).append("\n");
+                }
+                txtRegistrosRecentes.setText(registros.toString());
+            }
 
-        lineChart.invalidate(); // refresh
-
-        // Popular Registros Recentes
-        StringBuilder registros = new StringBuilder();
-        for (int i = assessments.size() - 1; i >= 0 && i >= assessments.size() - 5; i--) {
-            registros.append(assessments.get(i).first).append(" - Nível: ").append(assessments.get(i).second).append("\n");
-        }
-        txtRegistrosRecentes.setText(registros.toString());
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Toast.makeText(HistoryActivity.this, "Erro ao carregar o histórico.", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }
