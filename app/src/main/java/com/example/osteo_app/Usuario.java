@@ -9,6 +9,10 @@ public class Usuario {
     private String genero;
     private String comorbidades;
 
+    public Usuario() {
+        // Construtor vazio necessário para o Firebase
+    }
+
     public Usuario(String id, String nome, int idade, Integer anoDiagnostico, String celular, String genero, String comorbidades) {
         this.id = id;
         this.nome = nome;
