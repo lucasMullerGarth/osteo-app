@@ -1,6 +1,7 @@
 package com.example.osteo_app;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.SeekBar;
@@ -9,7 +10,6 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.firebase.database.DatabaseError;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -28,8 +28,8 @@ public class PainAssessmentActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pain_assessment);
 
-        painAssessmentDAO = new PainAssessmentDAO();
-        usuarioDAO = new UsuarioDAO();
+        painAssessmentDAO = new PainAssessmentDAO(this);
+        usuarioDAO = new UsuarioDAO(this);
 
         seekPain = findViewById(R.id.seekPain);
         txtPainLevel = findViewById(R.id.txtPainLevel);
@@ -71,37 +71,26 @@ public class PainAssessmentActivity extends AppCompatActivity {
         });
 
         btnSalvar.setOnClickListener(v -> {
-            usuarioDAO.getUsuario(new UsuarioDAO.UsuarioCallback() {
-                @Override
-                public void onUsuarioLoaded(Usuario usuario) {
-                    if (usuario == null) {
-                        Toast.makeText(PainAssessmentActivity.this, "Crie um perfil antes de salvar a avaliação.", Toast.LENGTH_LONG).show();
-                        startActivity(new Intent(PainAssessmentActivity.this, MainActivity.class));
-                        return;
-                    }
+            Usuario usuario = usuarioDAO.getUsuario();
+            if (usuario == null) {
+                Toast.makeText(this, "Crie um perfil antes de salvar a avaliação.", Toast.LENGTH_LONG).show();
+                startActivity(new Intent(this, MainActivity.class));
+                return;
+            }
 
-                    int nivelDor = seekPain.getProgress();
-                    painAssessmentDAO.inserirAvaliacao(dataAtual, nivelDor, new PainAssessmentDAO.PainAssessmentSaveCallback() {
-                        @Override
-                        public void onAssessmentSaved() {
-                            Toast.makeText(PainAssessmentActivity.this, "Avaliação de dor salva com sucesso!", Toast.LENGTH_SHORT).show();
-                        }
+            int nivelDor = seekPain.getProgress();
+            long id = painAssessmentDAO.inserirAvaliacao(usuario.getId(), dataAtual, nivelDor);
 
-                        @Override
-                        public void onCancelled(DatabaseError databaseError) {
-                            Toast.makeText(PainAssessmentActivity.this, "Erro ao salvar a avaliação.", Toast.LENGTH_SHORT).show();
-                        }
-                    });
-                }
-
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
-                    Toast.makeText(PainAssessmentActivity.this, "Erro ao verificar o perfil.", Toast.LENGTH_SHORT).show();
-                }
-            });
+            if (id > 0) {
+                Toast.makeText(this, "Avaliação de dor salva com sucesso!", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(this, "Erro ao salvar a avaliação.", Toast.LENGTH_SHORT).show();
+            }
         });
 
+        /*Barra de navegação inferior*/
         BottomNavigationView bottomNav = findViewById(R.id.bottomNav);
+
         bottomNav.setOnItemSelectedListener(item -> {
             int itemId = item.getItemId();
             if (itemId == R.id.nav_relief) {
@@ -110,21 +99,13 @@ public class PainAssessmentActivity extends AppCompatActivity {
             } else if (itemId == R.id.nav_pain) {
                 return true;
             } else if (itemId == R.id.nav_profile) {
-                usuarioDAO.getUsuario(new UsuarioDAO.UsuarioCallback() {
-                    @Override
-                    public void onUsuarioLoaded(Usuario usuario) {
-                        if (usuario != null) {
-                            startActivity(new Intent(PainAssessmentActivity.this, PerfilActivity.class));
-                        } else {
-                            startActivity(new Intent(PainAssessmentActivity.this, MainActivity.class));
-                        }
-                    }
-
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-                        // Tratar erro
-                    }
-                });
+                SharedPreferences prefs = getSharedPreferences("prefs", MODE_PRIVATE);
+                boolean isProfileCreated = prefs.getBoolean("isProfileCreated", false);
+                if (isProfileCreated) {
+                    startActivity(new Intent(this, PerfilActivity.class));
+                } else {
+                    startActivity(new Intent(this, MainActivity.class));
+                }
                 return true;
             }
             return false;

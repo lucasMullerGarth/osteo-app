@@ -1,7 +1,7 @@
 package com.example.osteo_app;
 
 public class Usuario {
-    private String id;
+    private long id;
     private String nome;
     private int idade;
     private Integer anoDiagnostico;
@@ -9,7 +9,7 @@ public class Usuario {
     private String genero;
     private String comorbidades;
 
-    public Usuario(String id, String nome, int idade, Integer anoDiagnostico, String celular, String genero, String comorbidades) {
+    public Usuario(long id, String nome, int idade, Integer anoDiagnostico, String celular, String genero, String comorbidades) {
         this.id = id;
         this.nome = nome;
         this.idade = idade;
@@ -19,7 +19,7 @@ public class Usuario {
         this.comorbidades = comorbidades;
     }
 
-    public String getId() {
+    public long getId() {
         return id;
     }
 
